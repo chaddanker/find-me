@@ -1,5 +1,7 @@
 var userLocation = '';
 
+var reports = [];
+
 function run() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition((position)=> {
@@ -20,8 +22,6 @@ function run() {
 
             map.addControl(new mapboxgl.NavigationControl());
 
-
-
         map.on('mousedown', function (e) {
         // e.lngLat is the longitude, latitude geographical position of the event;
             console.log(e.lngLat);
@@ -36,6 +36,13 @@ function run() {
                 .setLngLat(e.lngLat)
                 .addTo(map);
             userLocation = e.lngLat;
+
+            reports.push({
+              location: 'Krugersdorp',
+              latitude: e.lngLat.lat,
+              longitude: e.lngLat.lng
+            });
+            console.log(reports);
             // newUser(e.lngLat);
         });
         });
